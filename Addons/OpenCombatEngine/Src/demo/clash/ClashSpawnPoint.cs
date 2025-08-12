@@ -111,5 +111,12 @@ public partial class ClashSpawnPoint : Node2D
         // instantiated.GetChild<Node2D>(0).Modulate = unitColor;
         instantiated.AddToGroup(group);
         OpenTDE.Utils.GetChildrenOfType<Target>(instantiated)[0].targetGroups.Add(attackGroup);
+        
+        // Make enemy units face left when created
+        if (group == "Red")
+        {
+            FaceTarget faceTarget = instantiated.GetChild<FaceTarget>(0);
+            faceTarget.Scale = new Vector2(-Mathf.Abs(faceTarget.Scale.X), faceTarget.Scale.Y);
+        }
     }
 }
